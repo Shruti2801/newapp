@@ -1,4 +1,4 @@
-package com.example.newapp;
+package com.example.newapp.person;
 
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;

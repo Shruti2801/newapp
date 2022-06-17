@@ -1,5 +1,7 @@
-package com.example.newapp;
+package com.example.newapp.person;
 
+import com.example.newapp.config.MySecurityConfig;
+import com.example.newapp.person.PersonInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

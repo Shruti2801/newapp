@@ -1,20 +1,22 @@
-package com.example.newapp;
+package com.example.newapp.person;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
+@RequestMapping("/person-info")
 public class PersonInfoController {
 
     @Autowired
     PersonInfoService personInfoService;
 
-    @PostMapping("/add-person-info")
+    @PostMapping("/add")
     public ResponseEntity<PersonInfo> createPersonInfo(@RequestBody PersonInfo personInfo) {
         PersonInfo response = personInfoService.createPersonInfo(personInfo);
 
@@ -22,7 +24,7 @@ public class PersonInfoController {
 
     }
 
-    @GetMapping("/get-all-person-info")
+    @GetMapping("/get-all")
     public ResponseEntity<List<PersonInfo>> getPersonInfo() {
         List<PersonInfo> response = personInfoService.getPersonInfo();
 
@@ -30,7 +32,7 @@ public class PersonInfoController {
 
     }
 
-    @GetMapping("/get-person-info-by-id/{id}")
+    @GetMapping("/get-by-id/{id}")
     public ResponseEntity<PersonInfo> getPersonInfoById(@PathVariable String id) {
         PersonInfo response = personInfoService.getPersonInfoById(id);
 
@@ -47,8 +49,8 @@ public class PersonInfoController {
     }
 
 
-
-    @DeleteMapping("/delete-person-info-by-id/{id}")
+//    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/delete-by-id/{id}")
     public ResponseEntity deletePersonInfo(@PathVariable String id) {
         personInfoService.deletePersonInfo(id);
 
