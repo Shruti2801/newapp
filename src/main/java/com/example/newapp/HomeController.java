@@ -1,8 +1,11 @@
 package com.example.newapp;
 
+import java.security.Principal;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/public")
@@ -21,4 +24,9 @@ public class HomeController {
         return "Register page..";
     }
 
+    @RequestMapping("user")
+    @ResponseBody
+    public Principal user(Principal principal) {
+    	return principal;
+    }
 }

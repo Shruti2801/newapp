@@ -13,29 +13,27 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
+@EnableOAuth2Client
 //@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class MySecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                .and()
+                .csrf().disable()//.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
                 .authorizeRequests()
-                .antMatchers("/login","/home","/signin").permitAll()
-//                .antMatchers("/public/**").permitAll()
-                .antMatchers("/person-info/get-all").hasRole("ADMIN")
+                .antMatchers("/public/login").permitAll()
+//                .antMatchers("/public/**").permitAll().antMatchers("/person-info/add").permitAll().antMatchers("/person-info/get-all").hasRole("ADMIN")
                 .anyRequest()
-                .authenticated()
-                .and()
-                .formLogin()//form based authentication
-                .loginPage("/signin").permitAll()
-                .loginProcessingUrl("/dologin").defaultSuccessUrl("/person-info/get-all",true);
-//                .httpBasic(); // basic authentication
+                .authenticated();
+//                .and().httpBasic(); // basic authentication
+//                .formLogin();//form based authentication.loginPage("/signin").permitAll();.loginProcessingUrl("/dologin").defaultSuccessUrl("/person-info/get-all",true);
+              
     }
 
 
